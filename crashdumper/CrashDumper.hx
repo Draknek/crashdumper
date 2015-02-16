@@ -96,9 +96,9 @@ class CrashDumper
 	 */
 	
 	#if flash
-	public function new(sessionId_:String, ?stage_:Stage, ?path_:String, ?url_:String="http://localhost:8080/result", closeOnCrash_:Bool = true, ?customDataMethod_:CrashDumper->Void, ?postCrashMethod_:CrashDumper->Void)
+	public function new(sessionId_:String, ?stage_:Stage, ?path_:String, ?url_, closeOnCrash_:Bool = true, ?customDataMethod_:CrashDumper->Void, ?postCrashMethod_:CrashDumper->Void)
 	#else
-	public function new(sessionId_:String, ?path_:String, ?url_:String="http://localhost:8080/result", closeOnCrash_:Bool = true, ?customDataMethod_:CrashDumper->Void, ?postCrashMethod_:CrashDumper->Void) 
+	public function new(sessionId_:String, ?path_:String, ?url_, closeOnCrash_:Bool = true, ?customDataMethod_:CrashDumper->Void, ?postCrashMethod_:CrashDumper->Void) 
 	#end
 	{
 		closeOnCrash = closeOnCrash_;
@@ -334,7 +334,7 @@ class CrashDumper
 				}
 			}
 		
-			if (sendToServer)
+			if (sendToServer && url != null && url != "")
 			{
 				var entries:List<Entry> = new List();
 				
