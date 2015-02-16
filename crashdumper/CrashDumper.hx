@@ -296,9 +296,21 @@ class CrashDumper
 					failsafe--;
 				}
 				
-				var logdir = logID + "/";
+				var hasFiles = false;
 				
-				FileSystem.createDirectory(path + pathLogErrors + logdir);
+				for (filename in session.files.keys())
+				{
+					hasFiles = true;
+					break;
+				}
+				
+				var logdir = "";
+				
+				if (hasFiles)
+				{
+					logdir = logID + "/";
+					FileSystem.createDirectory(path + pathLogErrors + logdir);
+				}
 				
 				if (FileSystem.exists(path + pathLogErrors + logdir))
 				{
