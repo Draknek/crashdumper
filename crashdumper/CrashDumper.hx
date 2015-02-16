@@ -272,7 +272,7 @@ class CrashDumper
 			customDataMethod(this);			//allow the user to add custom data to the CrashDumper before it outputs
 		}
 		
-		var logdir:String = session.id + "_CRASH/"; //directory name for this crash
+		var logID:String = session.id + "_CRASH"; //directory name for this crash
 		
 		#if sys
 			if (writeToFile)
@@ -288,13 +288,15 @@ class CrashDumper
 				
 				var counter:Int = 0;
 				var failsafe:Int = 999;
-				while (FileSystem.exists(path + pathLogErrors + logdir) && failsafe > 0)
+				while (FileSystem.exists(path + pathLogErrors + logID) && failsafe > 0)
 				{
 					//if the session ID is not unique for some reason, append numbers until it is
-					logdir = session.id + "_CRASH_" + counter + "/";
+					logID = session.id + "_CRASH_" + counter;
 					counter++;
 					failsafe--;
 				}
+				
+				var logdir = logID + "/";
 				
 				FileSystem.createDirectory(path + pathLogErrors + logdir);
 				
@@ -302,11 +304,11 @@ class CrashDumper
 				{
 					uniqueErrorLogPath = path + pathLogErrors + logdir;
 					//write out the error message
-					var f:FileOutput = File.write(path + pathLogErrors + logdir + "_error.txt");
+					var f:FileOutput = File.write(path + pathLogErrors + logdir + logID + "_error.txt");
 					f.writeString(errorMessage);
 					f.close();
 					
-					var sanityCheck:String = File.getContent(path + pathLogErrors + logdir + "_error.txt");
+					var sanityCheck:String = File.getContent(path + pathLogErrors + logdir + logID + "_error.txt");
 					
 					//write out all our associated game session files
 					for (filename in session.files.keys())
