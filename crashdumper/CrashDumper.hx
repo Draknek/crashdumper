@@ -225,18 +225,16 @@ class CrashDumper
 		
 		e.__isCancelled = true;		//cancel the event. We control exiting from here on out.
 		
+		if (postCrashMethod != null)
+		{
+			postCrashMethod(this);
+		}
+		
 		if (closeOnCrash)
 		{
 			#if sys
 				Sys.exit(1);
 			#end
-		}
-		else
-		{
-			if (postCrashMethod != null)
-			{
-				postCrashMethod(this);
-			}
 		}
 	}
 	
