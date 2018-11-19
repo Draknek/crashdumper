@@ -113,7 +113,7 @@ class CrashDumper
 		session = new SessionData(sessionId_);
 		#end
 		#if !crashdumper-disablesystemdata
-		system = new SystemData();bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbvbc.
+		system = new SystemData();
 		#end
 		
 		endl = SystemData.endl();
