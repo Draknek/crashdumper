@@ -112,7 +112,9 @@ class CrashDumper
 		#else
 		session = new SessionData(sessionId_);
 		#end
+		#if !crashdumper-disablesystemdata
 		system = new SystemData();
+		#end
 		
 		endl = SystemData.endl();
 		sl = SystemData.slash();
@@ -439,6 +441,11 @@ class CrashDumper
 	 */
 	
 	private function systemStr():String {
+		if (system == null)
+		{
+			return "";
+		}
+		
 		return system.summary();
 	}
 	
